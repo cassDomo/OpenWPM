@@ -1,0 +1,50 @@
+"http://fabguys.com",
+"http://thepinknews.com",
+"http://bullchat.com",
+"http://mensnet.jp",
+"http://queerty.com",
+"http://advocate.com",
+"http://hrc.org",
+"http://appnebula.co", #generalStreaming
+"http://queer.de",
+"http://out.com",
+"http://autostraddle.com",
+"http://lgbtqnation.com",
+"http://gays-cruising.com", #cruising
+"http://datalounge.com",
+"http://g4guys.com", #somensfw 
+"http://joemygod.com",
+"http://pride.com",
+"http://sdlgbtn.com",
+"http://xl-gaytube.com", #porn
+"http://iboyz.cz", #somensfw
+"http://gaytimes.co.uk",
+"http://gay.it",
+"http://qruiser.com", #cruising
+"http://dgdgdg.com", #porn
+"http://justwatch-hd.com", #generalStreaming
+"http://erininthemorning.com",
+"http://gaysir.no", #somensfw
+"http://tgcomics.com",
+"http://kmhesaplama.com", #milageCalculator?
+"http://nakluky.cz",
+"http://gay-to-be.com", #dead
+"http://transequality.org",
+"http://nycpride.org",
+"http://glaad.org",
+"http://crusinggays.com", #cruising
+"http://pinknews.co.uk",
+"http://gaycities.com",
+"http://xtramagazine.com",
+"http://outrightusa.org", #dead
+"http://pridetoronto.com",
+"http://club21.org",
+"http://kobiety-kobietom.com",
+"http://instinctmagazine.com"
+"http://cromosomax.com",
+"http://xtasis.org", #porn
+"http://tunefulsoul.com",
+"http://towleroad.com",
+"http://primemanspa.tw", #dead
+"http://gaybodyblog.com",
+"http://washingtonblade.com"
