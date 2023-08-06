@@ -29,9 +29,14 @@ else:
 
 # Loads the default ManagerParams
 # and NUM_BROWSERS copies of the default BrowserParams
-NUM_BROWSERS = 2
+NUM_BROWSERS = 1
 manager_params = ManagerParams(num_browsers=NUM_BROWSERS)
 browser_params = [BrowserParams(display_mode="native") for _ in range(NUM_BROWSERS)]
+
+seedSitesList = open('similarweb41junefiltered.txt', 'r')
+seedAddresses = seedSitesList.read().splitlines()
+seedSitesList.close()
+print(seedAddresses)
 
 # Update browser configuration (use this for per-browser settings)
 for browser_param in browser_params:
@@ -47,10 +52,13 @@ for browser_param in browser_params:
     browser_param.callstack_instrument = False
     # Record DNS resolution
     browser_param.dns_instrument = True
+    #save seed
+    browser_param.profile_archive_dir = Path("./datadir/")
 
 # Update TaskManager configuration (use this for crawl-wide settings)
 manager_params.data_directory = Path("./datadir/")
 manager_params.log_path = Path("./datadir/openwpm.log")
+
 
 # memory_watchdog and process_watchdog are useful for large scale cloud crawls.
 # Please refer to docs/Configuration.md#platform-configuration-options for more information
@@ -62,11 +70,11 @@ manager_params.log_path = Path("./datadir/openwpm.log")
 with TaskManager(
     manager_params,
     browser_params,
-    SQLiteStorageProvider(Path("./datadir/crawl-data.sqlite")),
+    SQLiteStorageProvider(Path("./datadir/01-crawl-data.sqlite")),
     None,
 ) as manager:
     # Visits the sites
-    for index, site in enumerate(sites):
+    for index, site in enumerate(seedAddresses):
 
         def callback(success: bool, val: str = site) -> None:
             print(
