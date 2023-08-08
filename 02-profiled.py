@@ -19,13 +19,7 @@ if args.tranco:
     print("Loading tranco top sites list...")
     t = tranco.Tranco(cache=True, cache_dir=".tranco")
     latest_list = t.list()
-    sites = ["http://" + x for x in latest_list.top(10)]
-else:
-    sites = [
-        "http://www.example.com",
-        "http://www.princeton.edu",
-        "http://citp.princeton.edu/",
-    ]
+    sites = ["http://" + x for x in latest_list.top(50)]
 
 # Loads the default ManagerParams
 # and NUM_BROWSERS copies of the default BrowserParams
@@ -54,6 +48,8 @@ for browser_param in browser_params:
     browser_param.dns_instrument = True
     #save seed
     browser_param.profile_archive_dir = Path("./datadir/")
+    #load seed
+    browser_param.seed_tar = Path("./datadir/41lgbtseed.tar.gz")
 
 # Update TaskManager configuration (use this for crawl-wide settings)
 manager_params.data_directory = Path("./datadir/")
@@ -70,11 +66,11 @@ manager_params.log_path = Path("./datadir/openwpm.log")
 with TaskManager(
     manager_params,
     browser_params,
-    SQLiteStorageProvider(Path("./datadir/01-crawl-data.sqlite")),
+    SQLiteStorageProvider(Path("./datadir/02-crawl-data.sqlite")),
     None,
 ) as manager:
     # Visits the sites
-    for index, site in enumerate(seedAddresses):
+    for index, site in enumerate(sites):
 
         def callback(success: bool, val: str = site) -> None:
             print(
@@ -86,12 +82,14 @@ with TaskManager(
             site,
             site_rank=index,
             callback=callback,
+            reset=True
         )
 
         # Start by visiting the page
         command_sequence.append_command(GetCommand(url=site, sleep=3), timeout=60)
         # Have a look at custom_command.py to see how to implement your own command
         command_sequence.append_command(LinkCountingCommand())
+        
 
         # Run commands across all browsers (simple parallelization)
         manager.execute_command_sequence(command_sequence)
