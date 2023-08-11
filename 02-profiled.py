@@ -19,11 +19,11 @@ if args.tranco:
     print("Loading tranco top sites list...")
     t = tranco.Tranco(cache=True, cache_dir=".tranco")
     latest_list = t.list()
-    sites = ["http://" + x for x in latest_list.top(50)]
+    sites = ["http://" + x for x in latest_list.top(100)]
 
 # Loads the default ManagerParams
 # and NUM_BROWSERS copies of the default BrowserParams
-NUM_BROWSERS = 1
+NUM_BROWSERS = 5
 manager_params = ManagerParams(num_browsers=NUM_BROWSERS)
 browser_params = [BrowserParams(display_mode="native") for _ in range(NUM_BROWSERS)]
 
@@ -66,7 +66,7 @@ manager_params.log_path = Path("./datadir/openwpm.log")
 with TaskManager(
     manager_params,
     browser_params,
-    SQLiteStorageProvider(Path("./datadir/02-crawl-data.sqlite")),
+    SQLiteStorageProvider(Path("./datadir/41s-100t-crawl-data.sqlite")),
     None,
 ) as manager:
     # Visits the sites

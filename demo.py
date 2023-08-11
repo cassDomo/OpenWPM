@@ -19,7 +19,7 @@ if args.tranco:
     print("Loading tranco top sites list...")
     t = tranco.Tranco(cache=True, cache_dir=".tranco")
     latest_list = t.list()
-    sites = ["http://" + x for x in latest_list.top(10)]
+    sites = ["http://" + x for x in latest_list.top(100)]
 else:
     sites = [
         "http://www.example.com",
@@ -62,7 +62,7 @@ manager_params.log_path = Path("./datadir/openwpm.log")
 with TaskManager(
     manager_params,
     browser_params,
-    SQLiteStorageProvider(Path("./datadir/crawl-data.sqlite")),
+    SQLiteStorageProvider(Path("./datadir/41-unfiltered-crawl-data.sqlite")),
     None,
 ) as manager:
     # Visits the sites
