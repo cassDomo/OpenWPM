@@ -19,7 +19,7 @@ if args.tranco:
     print("Loading tranco top sites list...")
     t = tranco.Tranco(cache=True, cache_dir=".tranco")
     latest_list = t.list()
-    sites = ["http://" + x for x in latest_list.top(100)]
+    sites = ["http://" + x for x in latest_list.top(10000)]
 
 # Loads the default ManagerParams
 # and NUM_BROWSERS copies of the default BrowserParams
@@ -27,7 +27,7 @@ NUM_BROWSERS = 5
 manager_params = ManagerParams(num_browsers=NUM_BROWSERS)
 browser_params = [BrowserParams(display_mode="native") for _ in range(NUM_BROWSERS)]
 
-seedSitesList = open('similarweb41junefiltered.txt', 'r')
+seedSitesList = open('enrichedcis.txt', 'r')
 seedAddresses = seedSitesList.read().splitlines()
 seedSitesList.close()
 print(seedAddresses)
@@ -47,9 +47,9 @@ for browser_param in browser_params:
     # Record DNS resolution
     browser_param.dns_instrument = True
     #save seed
-    browser_param.profile_archive_dir = Path("./datadir/")
+ #   browser_param.profile_archive_dir = Path("./datadir/")
     #load seed
-    browser_param.seed_tar = Path("./datadir/41lgbtseed.tar.gz")
+    browser_param.seed_tar = Path("./datadir/enrichedcisseed.tar.gz")
 
 # Update TaskManager configuration (use this for crawl-wide settings)
 manager_params.data_directory = Path("./datadir/")
@@ -66,7 +66,7 @@ manager_params.log_path = Path("./datadir/openwpm.log")
 with TaskManager(
     manager_params,
     browser_params,
-    SQLiteStorageProvider(Path("./datadir/41s-100t-crawl-data.sqlite")),
+    SQLiteStorageProvider(Path("./datadir/cis-10k-crawl-data.sqlite")),
     None,
 ) as manager:
     # Visits the sites
