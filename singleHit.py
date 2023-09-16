@@ -21,9 +21,12 @@ if args.tranco:
     latest_list = t.list()
     sites = ["http://" + x for x in latest_list.top(5000)]
 
+else:
+    sites = ["http://tcm.com"]
+
 # Loads the default ManagerParams
 # and NUM_BROWSERS copies of the default BrowserParams
-NUM_BROWSERS = 5
+NUM_BROWSERS = 1
 manager_params = ManagerParams(num_browsers=NUM_BROWSERS)
 browser_params = [BrowserParams(display_mode="native") for _ in range(NUM_BROWSERS)]
 
@@ -50,7 +53,7 @@ for browser_param in browser_params:
     #save seed
  #   browser_param.profile_archive_dir = Path("./datadir/")
     #load seed
-    browser_param.seed_tar = Path("./datadir/enrichedcisseed.tar.gz")
+ #   browser_param.seed_tar = Path("./datadir/enrichedcisseed.tar.gz")
 
 # Update TaskManager configuration (use this for crawl-wide settings)
 manager_params.data_directory = Path("./datadir/")
@@ -67,7 +70,7 @@ manager_params.log_path = Path("./datadir/openwpm.log")
 with TaskManager(
     manager_params,
     browser_params,
-    SQLiteStorageProvider(Path("./datadir/cis-5k-crawl-data.sqlite")),
+    SQLiteStorageProvider(Path("./datadir/tcmSeedless.sqlite")),
     None,
 ) as manager:
     # Visits the sites
